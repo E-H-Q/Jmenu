@@ -3,7 +3,7 @@
 bash -c "xsel -c --clipboard"
 
 main() {
-	cat ~/chars | dmenu -i -l 5 -fn Monospace-14 -p "$(xsel -o --clipboard)" | awk "{print $1}" | while IFS= read -r line
+	cat ~/chars | dmenu -i -l 5 -fn Monospace-14 -p "$(xsel -o --clipboard)" | while IFS= read -r line
 	do
 		if [ "$line" == "*DEL" ]
 		then
