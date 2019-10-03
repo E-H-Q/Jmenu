@@ -3,7 +3,7 @@
 bash -c "xsel -c --clipboard"
 
 main() {
-	cat chars | dmenu -i -l 5 -fn Monospace-14 -p "$type: $(xsel -o --clipboard)" | while IFS= read -r line
+	cat hira | dmenu -i -l 5 -fn Monospace-14 -p "$type: $(xsel -o --clipboard)" | while IFS= read -r line
 	do
 		str=`xsel -o --clipboard`
 		if [ "$line" == "*DEL" ]
