@@ -3,7 +3,7 @@
 bash -c "xsel -c --clipboard"
 
 main() {
-	cat chars | dmenu -i -l 5 -fn Monospace-14 -p "$(xsel -o --clipboard)" | while IFS= read -r line
+	cat chars | dmenu -i -l 5 -fn Monospace-14 -p "$type: $(xsel -o --clipboard)" | while IFS= read -r line
 	do
 		str=`xsel -o --clipboard`
 		if [ "$line" == "*DEL" ]
@@ -14,9 +14,18 @@ main() {
 			bash -c "echo '$line' | tr -d ' [:alpha:]\n' | xsel -a --clipboard"
 			main
 		fi
+		
 	done
 }
-main
+type="H" # Defines whether to load Hiragana (H) or Katakana (K)
+if [ $type == "H" ]
+then
+	main
+else
+	echo
+	# load Katakana stuff here
+fi
+
 if [ "$(xsel -o --clipboard)" ]
 then
 	pgrep -x dunst >/dev/null && notify-send "$(xsel -o --clipboard) copied." -t 3000
