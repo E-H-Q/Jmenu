@@ -3,7 +3,7 @@
 bash -c "xsel -c --clipboard"
 
 main() {
-	cat hira | dmenu -i -l 5 -fn Monospace-14 -p "$type: $(xsel -o --clipboard)" | while IFS= read -r line
+	cat $file | dmenu -i -l 5 -fn Monospace-14 -p "$type: $(xsel -o --clipboard)" | while IFS= read -r line
 	do
 		str=`xsel -o --clipboard`
 		if [ "$line" == "*DEL" ]
@@ -20,10 +20,11 @@ main() {
 type="H" # Defines whether to load Hiragana (H) or Katakana (K)
 if [ $type == "H" ]
 then
+	file="hira"
 	main
 else
-	echo
-	# load Katakana stuff here
+	file="kata"
+	main
 fi
 
 if [ "$(xsel -o --clipboard)" ]
