@@ -17,7 +17,7 @@ main() {
 	done
 }
 main
-if [ "$(xsel -o --clipboard)" != "" ]
+if [ "$(xsel -o --clipboard)" ]
 then
 	pgrep -x dunst >/dev/null && notify-send "$(xsel -o --clipboard) copied." -t 3000
 fi
